@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<script name="create test"><action>go start_0;
+player bgm LOOP;
+set DRAWING background bg;
+layer background FIT 1;</action><lines><line id="start_0"><text>Hello</text><action></action><options><option><text>choose me</text><action>go #</action></option></options></line><line id="start_1"><text>World</text><action></action><options><option><text>choose me</text><action>go start_0</action></option></options></line></lines><drawings><layer id="background" pic_id="bg" match_mode="3" scale="100.0" pos_x="0.0" pos_y="0.0" opacity="100.0"/><layer id="myrole" pic_id="bg" match_mode="4" scale="100.0" pos_x="0.0" pos_y="0.0" opacity="100.0"/></drawings><resources><resource id="bg" rlt_path="pic.jpg"/><resource id="bgm" rlt_path="bgm.mp3"/><resource id="rp" rlt_path="role.png"/></resources><players><player id="bgm" rsc_id="bgm"/></players></script>

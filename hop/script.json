@@ -1,0 +1,19 @@
+{
+    "lines": [
+        {
+            "id": "start",
+            "text": "Hello World!",
+            "onenter": "",
+            "options": [
+                {
+                    "hint": "option_1",
+                    "onselect": ""
+                },
+                {
+                    "hint": "option_2",
+                    "onselect": ""
+                }
+            ]
+        }
+    ]
+}

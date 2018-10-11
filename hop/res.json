@@ -1,0 +1,18 @@
+{
+    "images": [
+        {
+            "id": "pic_bg",
+            "path": "assets/bg3.png"
+        },
+        {
+            "id": "pic_lty",
+            "path": "assets/pic_lty_new.png"
+        }
+    ],
+    "sounds": [
+        {
+            "id": "bgm",
+            "path": "assets/bgm_new.mp3"
+        }
+    ]
+}
