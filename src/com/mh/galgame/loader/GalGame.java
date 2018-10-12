@@ -80,12 +80,14 @@ public abstract class GalGame<I, S, G, P> {
         // Load script.json
         o = parser.parse(new FileReader(new File(root, "script.json"))).getAsJsonObject();
         JsonArray lines = o.get("lines").getAsJsonArray();
-        for (JsonElement je : lines) {
+        for (int i = 0; i < lines.size(); i++) {
+            JsonElement je = lines.get(i);
             JsonObject jo = je.getAsJsonObject();
             String id = jo.get("id").getAsString();
             String text = jo.get("text").getAsString();
             String onEnter = jo.get("onenter").getAsString();
             Line line = new Line(id, text, onEnter);
+            line.setIndex(i);
 
             JsonArray options = jo.get("options").getAsJsonArray();
             for (JsonElement opt : options) {
