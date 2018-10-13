@@ -63,7 +63,6 @@ public class Main extends Application {
         vbxOptions.setSpacing(10);
         vbxLine.setBackground(new Background(new BackgroundFill(Color.color(1, 1, 1, 0.5), new CornerRadii(16), new Insets(0,0,0,0))));
         sclOptions.setBackground(null);
-        sclOptions.style
         vbxOptions.setBackground(null);
 
 
