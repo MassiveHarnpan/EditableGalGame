@@ -1,22 +1,29 @@
 package com.mh.galgame.data;
 
 
-import java.util.ArrayList;
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
 
 public class Line extends Identified {
 
+    @Expose
     private String text;
+    @Expose
+    @SerializedName(value = "onstart")
     private String onStartAction;
-    private List<Option> options = new ArrayList<>();
+    @Expose
+    @SerializedName(value = "onempty")
+    private String onEmptyAction;
+    @Expose
+    private Option[] options = null;
 
     public Line(String id, String text, String onStartAction, Option... options) {
         setId(id);
         this.text = text;
         this.onStartAction = onStartAction;
-        this.options.addAll(Arrays.asList(options));
+        this.options = options;
     }
 
     public Line(String id) {
@@ -27,6 +34,7 @@ public class Line extends Identified {
         this(id,text,null);
     }
 
+    @Expose(serialize = false, deserialize = false)
     private int index = -1;
 
     public void setIndex(int index) {
@@ -57,27 +65,37 @@ public class Line extends Identified {
         this.text = text;
     }
 
+    /*
     public void addOption(Option option) {
         options.add(option);
-    }
-
-    public Option getOption(int index) {
-        return options.get(index);
     }
 
     public Option removeOption(int index) {
         return options.remove(index);
     }
+    */
+
+    public void setOptions(Option[] options) {
+        this.options = options;
+    }
+
+    public Option getOption(int index) {
+        return options[index];
+    }
 
     public int optionCount() {
-        return options.size();
+        return options == null ? 0 : options.length;
     }
 
-    public Iterator<Option> optionIterator() {
-        return options.iterator();
+    public Option[] getOptions() {
+        return Arrays.copyOf(options, options.length);
     }
 
-    public List<Option> getOptions() {
-        return options;
+    public String getOnEmptyAction() {
+        return onEmptyAction;
+    }
+
+    public void setOnEmptyAction(String onEmptyAction) {
+        this.onEmptyAction = onEmptyAction;
     }
 }

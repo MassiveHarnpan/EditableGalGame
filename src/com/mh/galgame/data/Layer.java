@@ -1,5 +1,7 @@
 package com.mh.galgame.data;
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 import com.mh.galgame.preform.updater.LayerUpdater;
 
 import java.util.Objects;
@@ -20,15 +22,20 @@ public class Layer extends Identified {
     public static final double TRANSLUCENT = 0.5D;
     public static final double OPAQUE = 1.0D;
 
+    @Expose
+    @SerializedName(value = "pic_id")
     private String picId;
-
+    @Expose
+    @SerializedName(value = "match_mode")
     private int matchMode;
+    @Expose
     private double scale;
-    //posX与posY，0代表中间，-1代表最左边，1代表最右边
+    @Expose
     private double x;
+    @Expose
     private double y;
-    //0完全透明，1完全不透明
-    private double opc;
+    @Expose
+    private double opc; //0完全透明，1完全不透明
 
 
     public Layer(String id) {

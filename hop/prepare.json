@@ -1,10 +1,10 @@
 {
-    "lineid": "start",
+    "line_id": "start",
     "layers": [
         {
             "id": "bg",
-            "resid": "pic_bg",
-            "matchmode": 3,
+            "pic_id": "pic_bg",
+            "match_mode": 3,
             "x": 0,
             "y": 0,
             "scale": 1,
@@ -12,39 +12,12 @@
         },
         {
             "id": "lty",
-            "resid": "pic_lty",
-            "matchmode": 4,
+            "pic_id": "pic_lty",
+            "match_mode": 4,
             "x": -100,
-            "y": 150,
+            "y": 0,
             "scale": 0.75,
-            "opc": 0.5
-        },
-        {
-            "id": "lty1",
-            "resid": "pic_lty",
-            "matchmode": 1,
-            "x": 100,
-            "y": -150,
-            "scale": 1,
-            "opc": 0.5
-        },
-        {
-            "id": "lty2",
-            "resid": "pic_lty",
-            "matchmode": 3,
-            "x": 100,
-            "y": 150,
-            "scale": 1,
-            "opc": 0.5
-        },
-        {
-            "id": "lty3",
-            "resid": "pic_lty",
-            "matchmode": 4,
-            "x": -100,
-            "y": -150,
-            "scale": 0.2,
-            "opc": 0.5
+            "opc": 1
         }
     ]
 }

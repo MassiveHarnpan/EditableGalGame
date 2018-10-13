@@ -1,7 +1,10 @@
 package com.mh.galgame.data;
 
+import com.google.gson.annotations.Expose;
+
 public class Identified implements Comparable<Identified> {
 
+    @Expose
     private String id = null;
 
     public String getId() {

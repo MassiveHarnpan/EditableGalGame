@@ -1,33 +1,38 @@
 package com.mh.galgame.data;
 
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
 
 public class Option {
 
-    private String text;
+    @Expose
+    private String hint;
+    @Expose
+    @SerializedName(value = "onselect")
     private String onSelectAction;
 
     public Option() {
         this("", null);
     }
 
-    public Option(String text) {
-        this(text, null);
+    public Option(String hint) {
+        this(hint, null);
     }
 
 
-    public Option( String text, String onSelectAction) {
-        this.text = text;
+    public Option(String hint, String onSelectAction) {
+        this.hint = hint;
         this.onSelectAction = onSelectAction;
     }
 
 
-    public String getText() {
-        return text;
+    public String getHint() {
+        return hint;
     }
 
-    public void setText(String text) {
-        this.text = text;
+    public void setHint(String hint) {
+        this.hint = hint;
     }
 
     public String getOnSelectAction() {
@@ -40,6 +45,6 @@ public class Option {
 
     @Override
     public String toString() {
-        return text;
+        return hint;
     }
 }

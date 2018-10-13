@@ -3,7 +3,8 @@ package com.mh.galgame.loader;
 import com.google.gson.*;
 import com.mh.galgame.data.Layer;
 import com.mh.galgame.data.Line;
-import com.mh.galgame.data.Option;
+import com.mh.galgame.loader.model.ModelRes;
+import com.mh.galgame.loader.model.ModelResource;
 import com.mh.galgame.preform.updater.LayerUpdater;
 import com.mh.galgame.preform.updater.LineUpdater;
 
@@ -55,71 +56,42 @@ public abstract class GalGame<I, S, G, P> {
         }
         this.root = root;
         this.res = res;
-        Gson gson = new Gson();
+        Gson gson = new GsonBuilder().serializeNulls().create();
         JsonParser parser = new JsonParser();
         // Load index.json
         JsonObject o = parser.parse(new FileReader(new File(root, "index.json"))).getAsJsonObject();
         this.width = o.get("width").getAsInt();
         this.height = o.get("height").getAsInt();
         // Load res.json
-        o = parser.parse(new FileReader(new File(root, "res.json"))).getAsJsonObject();
-        JsonArray images = o.get("images").getAsJsonArray();
-        for (JsonElement je : images) {
-            JsonObject jo = je.getAsJsonObject();
-            String id = jo.get("id").getAsString();
-            String rltPath = jo.get("path").getAsString();
-            res.addImage(id, res.loadImage(id, new File(root, rltPath)));
+        ModelRes mr = gson.fromJson(new FileReader(new File(root, "res.json")), ModelRes.class);
+        for (ModelResource image : mr.images) {
+            res.addImage(image.id, res.loadImage(image.id, new File(root, image.path)));
         }
-        JsonArray sounds = o.get("sounds").getAsJsonArray();
-        for (JsonElement je : sounds) {
-            JsonObject jo = je.getAsJsonObject();
-            String id = jo.get("id").getAsString();
-            String rltPath = jo.get("path").getAsString();
-            res.addSound(id, res.loadSound(id, new File(root, rltPath)));
+        for (ModelResource sound : mr.sounds) {
+            res.addSound(sound.id, res.loadSound(sound.id, new File(root, sound.path)));
         }
         // Load script.json
-        o = parser.parse(new FileReader(new File(root, "script.json"))).getAsJsonObject();
-        JsonArray lines = o.get("lines").getAsJsonArray();
-        for (int i = 0; i < lines.size(); i++) {
-            JsonElement je = lines.get(i);
-            JsonObject jo = je.getAsJsonObject();
-            String id = jo.get("id").getAsString();
-            String text = jo.get("text").getAsString();
-            String onEnter = jo.get("onenter").getAsString();
-            Line line = new Line(id, text, onEnter);
-            line.setIndex(i);
-
-            JsonArray options = jo.get("options").getAsJsonArray();
-            for (JsonElement opt : options) {
-                JsonObject joOpt = opt.getAsJsonObject();
-                String hint = joOpt.get("hint").getAsString();
-                String onSelect = joOpt.get("onselect").getAsString();
-                Option option = new Option(hint, onSelect);
-                line.addOption(option);
-            }
-            res.addLine(id, line);
+        JsonObject jo = parser.parse(new FileReader(new File(root, "script.json"))).getAsJsonObject();
+        Line[] lines = gson.fromJson(jo.get("lines"), Line[].class);
+        for (int i = 0; i <lines.length; i++) {
+            Line line = lines[i];
+            line.setIndex(res.getLineCount());
+            res.addLine(line.getId(), line);
         }
     }
 
     public void prepare(File root) throws FileNotFoundException {
+        Gson gson = new Gson();
         JsonParser parser = new JsonParser();
         // Load prepare.json
         JsonObject o = parser.parse(new FileReader(new File(root, "prepare.json"))).getAsJsonObject();
-        setPresentLine(res.getLine(o.get("lineid").getAsString()));
-        // Load layers
-        JsonArray layers = o.get("layers").getAsJsonArray();
-        for (JsonElement je : layers) {
-            JsonObject jo = je.getAsJsonObject();
-            String id = jo.get("id").getAsString();
-            String resId = jo.get("resid").getAsString();
-            int matchMode = jo.get("matchmode").getAsInt();
-            double x = jo.get("x").getAsDouble();
-            double y = jo.get("y").getAsDouble();
-            double scale = jo.get("scale").getAsDouble();
-            double opc = jo.get("opc").getAsDouble();
+        setPresentLine(res.getLine(o.get("line_id").getAsString()));
 
-            Layer layer = new Layer(id, resId, matchMode, scale, x, y, opc);
-            addLayer(id, layer);
+        // Load layers
+        Layer[] layers = gson.fromJson(o.get("layers"), Layer[].class);
+        for (int i = 0; i < layers.length; i++) {
+            Layer layer = layers[i];
+            addLayer(layer.getId(), layer);
         }
         // Load players
     }
@@ -191,6 +163,20 @@ public abstract class GalGame<I, S, G, P> {
     public void init(File root, ResourceManager<I, S> res) throws FileNotFoundException, LoadingException {
         loadRes(root, res);
         prepare(root);
+    }
+
+    public void go(String lineId) {
+        Line line;
+        if ("+".equals(lineId)) {
+            int index = presentLine.getIndex() + 1;
+            line = res.getLineByIndex(index);
+        } else if ("-".equals(lineId)) {
+            int index = presentLine.getIndex() - 1;
+            line = res.getLineByIndex(index);
+        } else {
+            line = res.getLine(lineId);
+        }
+        setPresentLine(line);
     }
 
 }

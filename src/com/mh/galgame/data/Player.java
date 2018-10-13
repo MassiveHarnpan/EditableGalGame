@@ -1,6 +1,9 @@
 package com.mh.galgame.data;
 
 
+import com.google.gson.annotations.Expose;
+import com.google.gson.annotations.SerializedName;
+
 public class Player extends Identified {
 
     public static final int PLAY = 1;
@@ -9,17 +12,15 @@ public class Player extends Identified {
     public static final int LOOP = 4;
     public static final int RESTART = 5;
 
-    private String lastRscId;
+    @Expose
+    @SerializedName(value = "res_id")
     private String rscId;
+    @Expose
     private int opt;
-    private int lastOpt;
 
     public Player(String id, String rscId) {
         setId(id);
         this.rscId = rscId;
-
-        lastRscId = null;
-        lastOpt = 0;
         opt = 0;
     }
 
@@ -31,21 +32,11 @@ public class Player extends Identified {
         return rscId;
     }
 
-    public String getLastRscId() {
-        return lastRscId;
-    }
-
     public void setRscId(String rscId) {
-        lastRscId = this.rscId;
         this.rscId = rscId;
     }
 
-    public void setLastOpt(int lastOpt) {
-        this.lastOpt = lastOpt;
-    }
-
     public void setOpt(int opt) {
-        lastOpt = this.opt;
         this.opt = opt;
     }
 
@@ -53,7 +44,4 @@ public class Player extends Identified {
         return opt;
     }
 
-    public int getLastOpt() {
-        return lastOpt;
-    }
 }
