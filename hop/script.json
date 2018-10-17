@@ -35,7 +35,7 @@
         {
             "id": "river_intro",
             "text": "TA：我是老江头啊~",
-            "onempty": "_ go 1"
+            "onempty": "_ go 1;lty set x=100,y=-97"
         },
         {
             "id": "river_intro_1",
