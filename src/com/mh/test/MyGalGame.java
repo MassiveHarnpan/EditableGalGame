@@ -1,6 +1,7 @@
 package com.mh.test;
 
 import com.mh.galgame.data.Layer;
+import com.mh.galgame.data.Player;
 import com.mh.galgame.loader.GalGame;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -14,6 +15,11 @@ public class MyGalGame extends GalGame<Image, Media, ImageView, MediaPlayer> {
     public ImageView createGraphic(Layer layer) {
         ImageView imageView = new ImageView(getRes().getImage(layer.getPicId()));
         return imageView;
+    }
+
+    @Override
+    public MediaPlayer createPerformer(Player player) {
+        return new MediaPlayer(getRes().getSound(player.getResId()));
     }
 
 }

@@ -82,11 +82,21 @@ public class AOLResponder implements ActionResponder {
                 GalGame g = (GalGame) obj.getObject();
                 String key = pair.getKey();
                 PrimitiveValue value = pair.getValue();
-                if (key == null || "id".equals(key)) {
+                if (key == null) {
+                    if (value.getType() == PrimitiveValue.NUMBER) {
+                        g.go(value.getInt());
+                    } else {
+                        g.go(value.getString());
+                    }
+                } else if ("id".equals(key)) {
                     g.go(value.getString());
                     return true;
+                } else if ("off".equals(key) && value.getType() == PrimitiveValue.NUMBER) {
+                    g.go(value.getInt());
+                } else {
+                    return false;
                 }
-                return false;
+                return true;
             }
         };
 

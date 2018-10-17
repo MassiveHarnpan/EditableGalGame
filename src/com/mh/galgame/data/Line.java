@@ -26,6 +26,8 @@ public class Line extends Identified {
         this.options = options;
     }
 
+
+
     public Line(String id) {
         this(id, "", null);
     }

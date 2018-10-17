@@ -19,5 +19,11 @@
             "scale": 0.75,
             "opc": 1
         }
+    ],
+    "players": [
+        {
+            "id": "bgm",
+            "res_id": "snd_bgm"
+        }
     ]
 }

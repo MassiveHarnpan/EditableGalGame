@@ -3,7 +3,7 @@
         {
             "id": "template",
             "text": "This is a templete for editing",
-            "onempty": "+",
+            "onempty": "_ go +",
             "onenter": "",
             "options": [
                 {
@@ -19,23 +19,23 @@
         {
             "id": "start",
             "text": "TA：哟！这不是我可爱的身下受茶馆吗？",
-            "onempty": "+",
+            "onempty": "_ go +",
             "onenter": "",
             "options": [
                 {
                     "hint": "你是。。。？",
-                    "onselect": "river_intro"
+                    "onselect": "_ go river_intro"
                 },
                 {
                     "hint": "滚！！！",
-                    "onselect": "bad_ending"
+                    "onselect": "_ go bad_ending"
                 }
             ]
         },
         {
             "id": "river_intro",
             "text": "TA：我是老江头啊~",
-            "onempty": "+"
+            "onempty": "_ go +"
         },
         {
             "id": "river_intro_1",
@@ -43,11 +43,11 @@
             "options": [
                 {
                     "hint": "噢！我想起来了，昨晚可真是销魂呢",
-                    "onselect": "+"
+                    "onselect": "_ go +"
                 },
                 {
                     "hint": "【这货蛇精病吧】",
-                    "onselect": "+"
+                    "onselect": "_ go +"
                 }
             ]
         },
@@ -57,27 +57,27 @@
             "options": [
                 {
                     "hint": "？？？你不会把视频发到网上去了吧！？",
-                    "onselect": "you_answer_wrong"
+                    "onselect": "_ go you_answer_wrong"
                 },
                 {
                     "hint": "？？？你没给钱！？",
-                    "onselect": "you_answer_right"
+                    "onselect": "_ go you_answer_right"
                 },
                 {
                     "hint": "？？？你射在我里面了？",
-                    "onselect": "you_answer_wrong"
+                    "onselect": "_ go you_answer_wrong"
                 }
             ]
         },
         {
             "id": "you_answer_wrong",
             "text": "老江头：不是哟",
-            "onempty": "river_give_money_1"
+            "onempty": "_ go river_give_money_1"
         },
         {
             "id": "you_answer_right",
             "text": "老江头：Bingo~",
-            "onempty": "river_give_money_1"
+            "onempty": "_ go river_give_money_1"
         },
         {
             "id": "river_give_money_1",
@@ -85,11 +85,11 @@
             "options": [
                 {
                     "hint": "【两眼放光】",
-                    "onselect": "+"
+                    "onselect": "_ go +"
                 },
                 {
                     "hint": "【别想啦，就上面这个选项】",
-                    "onselect": "+"
+                    "onselect": "_ go +"
                 }
             ]
         },
@@ -99,17 +99,18 @@
             "options": [
                 {
                     "hint": "吼啊吼啊！！！【两眼烁烁放光】",
-                    "onselect": "happy_ending"
+                    "onselect": "_ go happy_ending"
                 },
                 {
                     "hint": "我是个纯洁高尚的人！【义正言辞】",
-                    "onselect": "bad_ending"
+                    "onselect": "_ go bad_ending"
                 }
             ]
         },
         {
             "id": "happy_ending",
-            "text": "【于是老江头带上了茶馆，仨人在未孕寨里过上了性♂福快乐的生活】"
+            "text": "【于是老江头带上了茶馆，仨人在未孕寨里过上了性♂福快乐的生活】",
+            "onempty": "_ go +"
         },
         {
             "id": "bad_ending",
@@ -117,18 +118,18 @@
             "options": [
                 {
                     "hint": "废话，谁当RBQ乐意啊喂！",
-                    "onselect": "+"
+                    "onselect": "_ go +"
                 },
                 {
                     "hint": "你。。你想干什么！？",
-                    "onselect": "+"
+                    "onselect": "_ go +"
                 }
             ]
         },
         {
             "id": "bad_ending_1",
             "text": "【茶馆被扒光了衣服，套上了女装，戴上了猫耳，肛塞小尾巴，显得非常傲娇但是可爱💗】",
-            "onempty": "+"
+            "onempty": "_ go +"
         },
         {
             "id": "bad_ending_2",

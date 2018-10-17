@@ -1,5 +1,6 @@
 package com.mh.test;
 
+import com.mh.galgame.actionresponder.AOLResponder;
 import com.mh.galgame.data.Layer;
 import com.mh.galgame.data.Line;
 import com.mh.galgame.data.Option;
@@ -14,8 +15,10 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -50,13 +53,14 @@ public class Main extends Application {
         Text txtLine = new Text();
         ScrollPane sclOptions = new ScrollPane();
         VBox vbxOptions = new VBox();
+        TextField tfdCmd = new TextField();
 
         sclOptions.setOnMouseClicked(event -> {
             //System.out.println("# Clicked on "+game.getPresentLine().getId());
             Line line = game.getPresentLine();
-            String lineId;
-            if (line != null && line.optionCount() == 0 && (lineId = line.getOnEmptyAction()) != null) {
-                game.go(lineId);
+            String action;
+            if (line != null && line.optionCount() == 0 && (action = line.getOnEmptyAction()) != null) {
+                game.getResponder().eval(action);
             }
         });
 
@@ -79,6 +83,18 @@ public class Main extends Application {
         AnchorPane.setBottomAnchor(vbxLine, 20.0);
         AnchorPane.setLeftAnchor(vbxLine, 20.0);
         AnchorPane.setRightAnchor(vbxLine, 20.0);
+
+        tfdCmd.setOnAction(event -> {
+            String cmd = tfdCmd.getText();
+            if (cmd != null && !cmd.matches("\\s*")) {
+                System.out.println("$ "+cmd);
+                Object rst = game.getResponder().eval(cmd);
+                System.out.println("    -> "+rst);
+                if (rst != null && rst.equals(Boolean.TRUE)) {
+                    tfdCmd.setText("");
+                }
+            }
+        });
 
         Font font = new Font("书体坊赵九江钢笔楷书", 36);
         txtLine.setFont(font);
@@ -179,7 +195,7 @@ public class Main extends Application {
                         txtOption.setOnMouseClicked(event -> {
                             event.consume();
                             //System.out.println("$ Clicked on "+option.getHint());
-                            game.go(option.getOnSelectAction());
+                            game.getResponder().eval(option.getOnSelectAction());
                         });
                         vbxOptions.getChildren().add(txtOption);
                     }
@@ -223,7 +239,21 @@ public class Main extends Application {
         game.setLineUpdater(lineUpdater);
         game.setPlayerUpdater(playerUpdater);
 
+
+        game.setResponder(new AOLResponder(game));
+
         Scene scene = new Scene(stkRoot, game.getWidth(), game.getHeight());
+
+        scene.setOnKeyReleased(event -> {
+            if (event.getCode() == KeyCode.BACK_QUOTE) {
+                if (vbxLine.getChildren().contains(tfdCmd)) {
+                    vbxLine.getChildren().remove(tfdCmd);
+                } else {
+                    vbxLine.getChildren().add(tfdCmd);
+                }
+            }
+        });
+
         primaryStage.setScene(scene);
         primaryStage.show();
 

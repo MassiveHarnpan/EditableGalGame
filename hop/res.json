@@ -11,7 +11,7 @@
     ],
     "sounds": [
         {
-            "id": "bgm",
+            "id": "snd_bgm",
             "path": "assets/bgm_new.mp3"
         }
     ]

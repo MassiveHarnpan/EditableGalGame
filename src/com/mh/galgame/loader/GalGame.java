@@ -1,6 +1,7 @@
 package com.mh.galgame.loader;
 
 import com.google.gson.*;
+import com.mh.galgame.actionresponder.ActionResponder;
 import com.mh.galgame.data.Layer;
 import com.mh.galgame.data.Line;
 import com.mh.galgame.data.Player;
@@ -96,6 +97,11 @@ public abstract class GalGame<I, S, G, P> {
             addLayer(layer.getId(), layer);
         }
         // Load players
+        Player[] players = gson.fromJson(o.get("players"), Player[].class);
+        for (int i = 0; i < players.length; i++) {
+            Player player = players[i];
+            addPlayer(player.getId(), player);
+        }
     }
 
     //region updaters and getters and setters
@@ -198,6 +204,16 @@ public abstract class GalGame<I, S, G, P> {
         prepare(root);
     }
 
+    private ActionResponder responder;
+
+    public void setResponder(ActionResponder responder) {
+        this.responder = responder;
+    }
+
+    public ActionResponder getResponder() {
+        return responder;
+    }
+
     public void go(String lineId) {
         Line line;
         if ("+".equals(lineId)) {
@@ -209,6 +225,15 @@ public abstract class GalGame<I, S, G, P> {
         } else {
             line = res.getLine(lineId);
         }
+        System.out.println(line);
+        setPresentLine(line);
+    }
+
+    public void go(int offset) {
+        Line line;
+        int index = presentLine.getIndex() + offset;
+        line = res.getLineByIndex(index);
+        System.out.println(line);
         setPresentLine(line);
     }
 
