@@ -3,10 +3,12 @@ package com.mh.galgame.loader;
 import com.google.gson.*;
 import com.mh.galgame.data.Layer;
 import com.mh.galgame.data.Line;
+import com.mh.galgame.data.Player;
 import com.mh.galgame.loader.model.ModelRes;
 import com.mh.galgame.loader.model.ModelResource;
 import com.mh.galgame.preform.updater.LayerUpdater;
 import com.mh.galgame.preform.updater.LineUpdater;
+import com.mh.galgame.preform.updater.PlayerUpdater;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -98,22 +100,27 @@ public abstract class GalGame<I, S, G, P> {
 
     //region updaters and getters and setters
     private LayerUpdater layerUpdater;
+    private PlayerUpdater playerUpdater;
     private LineUpdater lineUpdater;
 
     public LayerUpdater getLayerUpdater() {
         return layerUpdater;
     }
-
     public LineUpdater getLineUpdater() {
         return lineUpdater;
+    }
+    public PlayerUpdater getPlayerUpdater() {
+        return playerUpdater;
     }
 
     public void setLayerUpdater(LayerUpdater layerUpdater) {
         this.layerUpdater = layerUpdater;
     }
-
     public void setLineUpdater(LineUpdater lineUpdater) {
         this.lineUpdater = lineUpdater;
+    }
+    public void setPlayerUpdater(PlayerUpdater playerUpdater) {
+        this.playerUpdater = playerUpdater;
     }
     //endregion
 
@@ -140,6 +147,32 @@ public abstract class GalGame<I, S, G, P> {
         layers.remove(id);
         graphics.remove(layer);
         layerUpdater.onLayerRemoved(layer);
+    }
+
+
+    private Map<String, Player> players = new HashMap<>();
+    private Map<Player, P> performers = new HashMap<>();
+
+    public abstract P createPerformer(Player player);
+
+    public P getPerformer(Player player) {
+        return performers.get(player);
+    }
+
+    public void addPlayer(String id, Player player) {
+        player.setUpdater(playerUpdater);
+        players.put(id, player);
+        performers.put(player, createPerformer(player));
+        playerUpdater.onPlayerAdded(player);
+    }
+
+    public void removePlayer(String id) {
+        Player player = players.get(id);
+        player.setOpt(Player.STOP);
+        player.setUpdater(null);
+        players.remove(id);
+        performers.remove(player);
+        playerUpdater.onPlayerRemoved(player);
     }
     //endregion
 

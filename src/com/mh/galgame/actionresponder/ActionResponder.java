@@ -5,4 +5,5 @@ public interface ActionResponder {
 
     Object get(String key);
     Object set(String key, Object value);
+    Object del(String key);
 }

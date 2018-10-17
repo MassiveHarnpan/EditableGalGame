@@ -7,8 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="command-1.0" level="project" />
-    <orderEntry type="library" name="dom4j-2.0.2" level="project" />
     <orderEntry type="library" name="gson-2.8.5" level="project" />
+    <orderEntry type="library" name="aol" level="project" />
   </component>
 </module>

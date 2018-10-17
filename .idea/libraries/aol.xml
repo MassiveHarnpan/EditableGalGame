@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="command-1.0">
+  <library name="aol">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/../lib/command-1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../lib/aol.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

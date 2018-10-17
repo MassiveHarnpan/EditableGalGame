@@ -3,11 +3,13 @@ package com.mh.test;
 import com.mh.galgame.data.Layer;
 import com.mh.galgame.data.Line;
 import com.mh.galgame.data.Option;
+import com.mh.galgame.data.Player;
 import com.mh.galgame.loader.GalGame;
 import com.mh.galgame.loader.LoadingException;
 import com.mh.galgame.loader.ResourceManager;
 import com.mh.galgame.preform.updater.LayerUpdater;
 import com.mh.galgame.preform.updater.LineUpdater;
+import com.mh.galgame.preform.updater.PlayerUpdater;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
@@ -187,9 +189,39 @@ public class Main extends Application {
                 }
             }
         };
+        PlayerUpdater playerUpdater = new PlayerUpdater() {
+            @Override
+            public void onPlayerAdded(Player player) {
+                onPlayerOptChanged(player, player.getOpt());
+            }
+
+            @Override
+            public void onPlayerRemoved(Player player) {
+            }
+
+            @Override
+            public void onResIdChanged(Player player, String resId) {
+                player.setOpt(Player.STOP);
+                game.removePlayer(player.getId());
+                game.addPlayer(player.getId(), player);
+            }
+
+            @Override
+            public void onPlayerOptChanged(Player player, int opt) {
+                MediaPlayer mediaPlayer = game.getPerformer(player);
+                switch (opt) {
+                    case Player.PLAY: mediaPlayer.play(); break;
+                    case Player.PAUSE: mediaPlayer.pause(); break;
+                    case Player.STOP: mediaPlayer.stop(); break;
+                    case Player.LOOP: mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); mediaPlayer.play(); break;
+                    case Player.RESTART: mediaPlayer.stop(); mediaPlayer.play(); break;
+                }
+            }
+        };
 
         game.setLayerUpdater(layerUpdater);
         game.setLineUpdater(lineUpdater);
+        game.setPlayerUpdater(playerUpdater);
 
         Scene scene = new Scene(stkRoot, game.getWidth(), game.getHeight());
         primaryStage.setScene(scene);
