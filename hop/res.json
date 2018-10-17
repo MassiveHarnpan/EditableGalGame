@@ -12,7 +12,7 @@
     "sounds": [
         {
             "id": "snd_bgm",
-            "path": "assets/bgm_new.mp3"
+            "path": "assets/bgm.mp3"
         }
     ]
 }

@@ -145,6 +145,7 @@ public abstract class GalGame<I, S, G, P> {
         layers.put(id, layer);
         graphics.put(layer, createGraphic(layer));
         layerUpdater.onLayerAdded(layer);
+        responder.set(id, layer);
     }
 
     public void removeLayer(String id) {
@@ -153,6 +154,7 @@ public abstract class GalGame<I, S, G, P> {
         layers.remove(id);
         graphics.remove(layer);
         layerUpdater.onLayerRemoved(layer);
+        responder.del(id);
     }
 
 
@@ -170,6 +172,7 @@ public abstract class GalGame<I, S, G, P> {
         players.put(id, player);
         performers.put(player, createPerformer(player));
         playerUpdater.onPlayerAdded(player);
+        responder.set(id, player);
     }
 
     public void removePlayer(String id) {
@@ -179,6 +182,7 @@ public abstract class GalGame<I, S, G, P> {
         players.remove(id);
         performers.remove(player);
         playerUpdater.onPlayerRemoved(player);
+        responder.del(id);
     }
     //endregion
 

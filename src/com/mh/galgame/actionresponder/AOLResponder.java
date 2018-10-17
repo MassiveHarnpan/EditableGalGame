@@ -126,11 +126,7 @@ public class AOLResponder implements ActionResponder {
 
     @Override
     public Object set(String key, Object value) {
-        if (value != null && aol.getClass(value.getClass().getSimpleName()) != null) {
-            return aol.setVar(key, value, value.getClass().getSimpleName());
-        } else {
-            return aol.setVar(key, value);
-        }
+        return aol.setVar(key, value, value.getClass().getSimpleName());
     }
 
     @Override

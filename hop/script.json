@@ -3,7 +3,7 @@
         {
             "id": "template",
             "text": "This is a templete for editing",
-            "onempty": "_ go +",
+            "onempty": "_ go 1",
             "onenter": "",
             "options": [
                 {
@@ -19,7 +19,7 @@
         {
             "id": "start",
             "text": "TA：哟！这不是我可爱的身下受茶馆吗？",
-            "onempty": "_ go +",
+            "onempty": "_ go 1",
             "onenter": "",
             "options": [
                 {
@@ -35,7 +35,7 @@
         {
             "id": "river_intro",
             "text": "TA：我是老江头啊~",
-            "onempty": "_ go +"
+            "onempty": "_ go 1"
         },
         {
             "id": "river_intro_1",
@@ -43,11 +43,11 @@
             "options": [
                 {
                     "hint": "噢！我想起来了，昨晚可真是销魂呢",
-                    "onselect": "_ go +"
+                    "onselect": "_ go 1"
                 },
                 {
                     "hint": "【这货蛇精病吧】",
-                    "onselect": "_ go +"
+                    "onselect": "_ go 1"
                 }
             ]
         },
@@ -85,11 +85,11 @@
             "options": [
                 {
                     "hint": "【两眼放光】",
-                    "onselect": "_ go +"
+                    "onselect": "_ go 1"
                 },
                 {
                     "hint": "【别想啦，就上面这个选项】",
-                    "onselect": "_ go +"
+                    "onselect": "_ go 1"
                 }
             ]
         },
@@ -110,7 +110,7 @@
         {
             "id": "happy_ending",
             "text": "【于是老江头带上了茶馆，仨人在未孕寨里过上了性♂福快乐的生活】",
-            "onempty": "_ go +"
+            "onempty": "_ go 1"
         },
         {
             "id": "bad_ending",
@@ -118,18 +118,18 @@
             "options": [
                 {
                     "hint": "废话，谁当RBQ乐意啊喂！",
-                    "onselect": "_ go +"
+                    "onselect": "_ go 1"
                 },
                 {
                     "hint": "你。。你想干什么！？",
-                    "onselect": "_ go +"
+                    "onselect": "_ go 1"
                 }
             ]
         },
         {
             "id": "bad_ending_1",
             "text": "【茶馆被扒光了衣服，套上了女装，戴上了猫耳，肛塞小尾巴，显得非常傲娇但是可爱💗】",
-            "onempty": "_ go +"
+            "onempty": "_ go 1"
         },
         {
             "id": "bad_ending_2",
